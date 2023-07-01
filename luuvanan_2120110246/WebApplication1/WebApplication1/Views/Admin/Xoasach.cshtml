@@ -1,0 +1,92 @@
+﻿@model WebApplication1.Models.SACH
+
+@{
+    ViewBag.Title = "Xoasach";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>xác nhận thông tin sách cần xóa?</h2>
+<h3>bạn quyết định xóa quển ssachs này?</h3>
+<div>
+   
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            tên sách:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tensach)
+        </dd>
+
+        <dt>
+            giá bán:
+        </dt>
+
+        <dd>
+            @string.Format("{0:0,0}", Model.Giaban) VNĐ
+        </dd>
+
+        <dt>
+            mô tả:
+        </dt>
+
+        <dd style="width:600px;text-align:justify">
+            @Html.DisplayFor(model => model.Mota)
+        </dd>
+
+        <dt>
+            ảnh bìa:
+        </dt>
+
+        <dd>
+            <img src="@Url.Content("~/Hinhsanpham/"+Model.Anhbia)" width="120px" />
+        </dd>
+
+        <dt>
+            ngày cập nhật:
+        </dt>
+
+        <dd>
+            @string.Format("{0:dd/MM/yyyy}", Model.Ngaycapnhat) VNĐ
+        </dd>
+
+
+        <dt>
+            số lượng tồn:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Soluongton)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaCD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaCD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaNXB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaNXB)
+        </dd>
+
+    </dl>
+</div>
+<div>
+    @using (Html.BeginForm())
+    {
+        <div class="form-actions no-color">
+            <input type="submit" value="XÓA" class="btn btn-default" />
+            @Html.ActionLink("TRỞ VỀ", "Sach")
+        </div>
+
+
+    }
+
+</div>

@@ -1,0 +1,111 @@
+﻿@*@model IEnumerable<WebApplication1.Models.SACH>*@
+@using WebApplication1.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<WebApplication1.Models.SACH>
+@helper Truncete(String input, int length)
+{
+    if (input.Length < length)
+    {
+            @input
+    }
+    else
+        {
+            @input.Substring(0, length) <text>...</text>
+        }
+}
+
+            @{
+                ViewBag.Title = "Sach";
+                Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+            }
+
+            <h2>QUẢN LÍ THÔNG TIN SÁCH</h2>
+
+            <p>
+                @Html.ActionLink("thêm mới", "Themmoisach")
+            </p>
+            <table class="table" border="1>
+                <tr>
+                    <th style="width:200px">Tên sách</th>
+                    <th style="width:200px">Gía bán</th>
+                    <th style="width:200px">Mô tả</th>
+                    <th style="width:200px">Ảnh bìa</th>
+                    <th style="width:200px">Ngày cập nhật</th>
+                    <th style="width:200px">SL.Tồn</th>
+                    <th style="width:200px">Tên chủ đề</th>
+                    <th style="width:200px">Tên NXB</th>
+                </tr>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().Tensach)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().Giaban)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().Mota)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().Anhbia)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().Ngaycapnhat)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().Soluongton)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().MaCD)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().MaNXB)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tensach)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Giaban)
+                        </td>
+                        <td>
+                            @Truncete(item.Mota,100)
+                        </td>
+                        <td>
+                            <img src="@Url.Content("~/Hinhsanpham/" + item.Anhbia)" width="120px" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ngaycapnhat)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Soluongton)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CHUDE.Tenchude)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NHAXUATBAN.tenNXB)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Sửa", "Suasach", new { id = item.Masach }) |
+                            @Html.ActionLink("Chi tiết", "Chitietsach", new { id = item.Masach }) |
+                            @Html.ActionLink("Xóa", "Xoasach", new { id = item.Masach })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+
+            @(Model.PageCount < Model.PageNumber ? 0: Model.PageNumber)/@Model.PageCount;
+            <div class="menuTrang">
+                @Html.PagedListPager(Model, page => Url.Action("Sach", new { page = page }))
+            </div>
+            <style>
+                .menuTrang li {
+                    display: inline;
+                }
+            </style>

@@ -1,0 +1,39 @@
+﻿<style type="text/css">
+    #Datmua a {
+        clear: both;
+        background-color: red;
+        color: white;
+        width: 120px;
+        height: 35px;
+        display: block;
+        float: right;
+        text-align: center;
+        padding-top: 10px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+        #Datmua a:hover {
+            background-color: gray;
+            color: red;
+        }
+</style>
+
+<h3>THÔNG TIN CHI TIẾT SÁCH</h3>
+<div>
+    <div style="width:40%; float:left;border-left:1px;border-color:azure">
+        <img src="~/Hinhsanpham/@Model.Anhbia" width="100%" />
+    </div>
+    <div style="width:60% ; float:left; padding:10px">
+        <h4 style="font-weight:bold; color:red"> Tên sách: @Model.Tensach</h4>
+        <p style="text-align:justify"><span style="font-weight:bold">Mô tả</span>@Model.Mota</p>
+        <p style="font-weight:bold"> Giá bán:<span style="color:red;font-size:16pt"> @Model.Giaban VNĐ</span></p>
+    </div>
+    <div>
+        <div id="Datmua">
+            <a href="@Url.Action("ThemGioHang", "Giohang", new { @iMasach=@Model.Masach, @strUrl=Request.Url.ToString() })">
+                ĐẶT MUA
+            </a>
+        </div>
+    </div>
+</div>
